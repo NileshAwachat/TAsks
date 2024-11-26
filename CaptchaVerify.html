@@ -1,0 +1,160 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // function generateCaptcha(){
+        //     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        //     var string_length = 8;
+        //     var randomstring = '';
+        //     for (var i=0; i<string_length; i++) {
+        //         var rnum = Math.floor(Math.random() * chars.length);
+        //         randomstring += chars.substring(rnum,rnum+1);
+        //     }
+        //     document.getElementById("mainCaptcha").value = randomstring;
+        // }
+        // function verifyCaptcha(){
+        //     var userCaptcha = document.getElementById("userCaptcha").value;
+        //     var mainCaptcha = document.getElementById("mainCaptcha").value;
+        //     if(userCaptcha == mainCaptcha){
+        //         document.getElementById("error").innerHTML = "";
+        //         document.getElementById("success").innerHTML = "Verified";
+        //     }
+        //     else{
+        //         document.getElementById("error").innerHTML = "Not Verified";
+        //         document.getElementById("success").innerHTML = "";
+        //     }
+        // }
+        // generateCaptcha();
+        // verifyCaptcha();
+        // document.getElementById("refresh").onclick = function(){
+        //     generateCaptcha();
+        //     verifyCaptcha();
+        // }
+        // document.getElementById("verify").onclick = function(){
+        //     verifyCaptcha();
+        // }
+        
+//         function generateCaptcha(){
+//             var cap = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+//                 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+//                 '0','1','2','3','4','5','6','7','8','9','@','!','#','$','%','&','*','+');
+            
+//             var i;
+//              for(i=0; i<4; i++){
+//                 var a = cap[Math.floor(Math.random()*cap.length)];
+//                 var b = cap[Math.floor(Math.random()*cap.length)];
+//                 var c = cap[Math.floor(Math.random()*cap.length)];
+//                 var d = cap[Math.floor(Math.random()*cap.length)];
+//              }
+//              var captcha = a+b+c+d;
+//              document.getElementById("mainCaptcha").value = captcha;
+//         }
+
+//         function verifyCaptcha(){
+//             var string1 = removeSpaces(document.getElementById('mainCaptcha').value);
+//             var string2 = removeSpaces(document.getElementById('userCaptcha').value);
+
+//             if(string1 == string2){
+//                 document.getElementById("success").innerHTML = "Verified";
+//                 return true;
+//             }
+//             else{
+//                 document.getElementById("error").innerHTML = "Not Verified";
+
+//                 return false;
+                
+//             }   
+
+//                 document.getElementById("error").innerHTML = " ";
+//                 function removeSpaces(string){
+//                     return string.split('').join("")
+//                 }
+
+//         }
+//  </script>
+</head>
+<body onload="generateCaptcha();">
+   
+    <center><h1>Verify Your Real Existance!</h1></center>
+    
+    <table>
+        
+        <tr><td>
+            <input type="text" id="mainCaptcha" readonly ="readonly"/>
+            <input type = "button" id="refresh" value="Refresh" onclick="generateCaptcha();"/>
+        </td></tr>
+        
+        <tr><td> 
+            <input type="text" id="userCaptcha" placeholder="Enter Captcha Here"/>
+        </td></tr>
+
+        <tr><td>
+            <input type="button" id="verify" value="Verify" onclick="verifyCaptcha();"/>
+        </td></tr>
+
+        <tr><td>
+            <span id="error"style = "color:red"></span>
+        </td></tr>
+        
+        <tr><td>
+            <span id="success"style = "color:green"></span>
+        </td></tr>
+
+    </table>
+     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function generateCaptcha(){
+            var cap = /*[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];*/new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+              'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                 '0','1','2','3','4','5','6','7','8','9','@','!','#','$','%','&','*','+');
+            var captcha = "";
+            for(var i=0; i<4; i++){
+                captcha += cap[Math.floor(Math.random()*cap.length)];
+            }
+            document.getElementById("mainCaptcha").value = captcha;
+        }
+
+        function verifyCaptcha(){
+            var string1 = document.getElementById('mainCaptcha').value;
+            var string2 = document.getElementById('userCaptcha').value;
+
+            if(string1 == string2){  
+                document.getElementById("success").innerHTML = "Verified";
+                generateCaptcha(); // Generate a new Captcha
+                document.getElementById("userCaptcha").value = ""; // Clear the user input
+            }
+            else{
+                document.getElementById("error").innerHTML = "Not Verified";
+            }
+        }
+
+        generateCaptcha();
+    </script>
+</head>
+<body>
+    <center><h1>Verify Your Real Existance!</h1></center>
+    <div>
+        <input type="text" id="mainCaptcha" readonly="readonly"/>
+        <input type="button" id="refresh" value="Refresh" onclick="generateCaptcha();"/>
+        <br><br>
+        <input type="text" id="userCaptcha" placeholder="Enter Captcha Here"/>
+        <input type="button" id="verify" value="Verify" onclick="verifyCaptcha();"/>
+        <br><br>
+        <span id="error" style="color:red"></span>
+        <br>
+        <span id="success" style="color:green"></span>
+    </div>
+</body>
+</html>

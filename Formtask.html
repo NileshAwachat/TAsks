@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-left: 30%;
+        }
+
+        label {
+            margin-left: 100px;
+            font-size: 20px;
+        }
+
+        input {
+            margin-left: 100px;
+            height: 30px;
+            width: 400px;
+        }
+
+        input[type="submit"] {
+            background-color: green;
+            height: 40px;
+            width: 407px;
+        }
+
+        .counter {
+            position: absolute;
+            left: 922px;
+            top: 47%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Registration From</h1>
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your Email" required><br><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" placeholder="Enter your Address" required><br><br>
+        <div>
+            <label for="number">Number:</label><br>
+            <input type="number" id="number" name="number" placeholder="Enter your Number" oninput="checkLength()" /><span id="counter" class="counter">0/10</span><br><br>
+        </div>
+        <input type="submit" value="Submit">
+        
+        <script>
+            function checkLength() {
+                const input = document.getElementById('number');
+                const counter = document.getElementById('counter');
+                
+                let inputValue = input.value; //actual value which user type
+                
+                let length = inputValue.length;//imp(length of inputvalue)
+                if (length > 10) {
+                    input.value = inputValue.slice(0, 10);  //10 tak ke no. show honge jo user 10 se jada bhi type karega
+                }
+
+                counter.textContent = `${input.value.length}/10`;
+            }
+        </script>
+        
+
+</body>
+
+</html>
